@@ -1,0 +1,9 @@
+SCC = This is a source code control file
+
+[Reformat_program.csproj]
+SCC_Aux_Path = http://foundry.gbscorp.com/VaultService|:9
+SCC_Project_Name = $/Bradley Soverns/Programs/Reformat_program/Trunk/Reformat_program/Reformat_program
+
+[Reformat.csproj]
+SCC_Aux_Path = http://foundry.gbscorp.com/VaultService|:9
+SCC_Project_Name = $/Bradley Soverns/Programs/Reformat_program/Trunk/Reformat_program/Reformat_program

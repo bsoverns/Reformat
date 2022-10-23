@@ -1,0 +1,257 @@
+﻿//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Drawing;
+//using System.IO;
+//using System.Linq;
+//using System.Net;
+//using System.Text;
+//using System.Threading;
+//using System.Threading.Tasks;
+//using System.Windows.Forms;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.Odbc;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Net;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using Microsoft.Win32;
+using System.Threading;
+using System.Security.Cryptography;
+
+namespace Reformat_program
+{
+    public partial class frmMain : Form
+    {
+        public frmMain()
+        {
+            InitializeComponent();
+            cmbOptions.Items.Add("Add Commas");
+            cmbOptions.Items.Add("Add Commas - Flat");
+            cmbOptions.Items.Add("Ticks");
+            cmbOptions.Items.Add("Ticks - Flat");
+            cmbOptions.Items.Add("837/835");
+            cmbOptions.Items.Add("Comma Split");
+            cmbOptions.Items.Add("{ get; set; }");
+            cmbOptions.Items.Add("Class list");
+            cmbOptions.Items.Add("CopySQLtoC#");
+            cmbOptions.Items.Add("CopySQLtoJavaScript");
+            cmbOptions.Items.Add("Mirth | seperate");
+            cmbOptions.Items.Add("Mirth deliminator");
+            cmbOptions.Items.Add("Base64 Encrypt");
+            cmbOptions.Items.Add("Base64 Decrypt");
+            cmbOptions.SelectedItem = "Add Commas";
+            Mail_message();  
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //MessageBox.Show(cmbOptions.SelectedItem.ToString());
+                if (cmbOptions.SelectedItem.ToString() == "Add Commas")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", ",\n");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Add Commas - Flat")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", ", ");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Ticks")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\',\n\'");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Ticks - Flat")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\', \'");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "837/835")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("~", "\n");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Comma Split")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace(",", ",\n");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "GUID")
+                {
+                    //E9B98DD0-CB1F-40AD-A5C0-ED42B4EF0A0E
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("~", "\n");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "{ get; set; }")
+                {
+                    string[] lines = richTextBox1.Text.Replace(" ", "").Split(new string[] { "\n", "," }, StringSplitOptions.None);
+                    richTextBox2.Clear();
+
+                    foreach (string line in lines)
+                    {
+                        richTextBox2.Text = (richTextBox2.Text + "public string " + line + "\n{\nget { return _" + line.ToString() + "; } \nset { this._" + line.ToString() + " = value; }\n}\n\n");
+                        //richTextBox2.Text = richTextBox1.Text.Replace("\n", ",\n");
+                    }
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Class list")
+                {
+                    string[] lines = richTextBox1.Text.Replace(" ", "").Split(new string[] { "\n", "," }, StringSplitOptions.None);
+                    richTextBox2.Clear();
+
+                    foreach (string line in lines)
+                    {
+                        richTextBox2.Text = (richTextBox2.Text + "this._" + line.ToString() + " = " + line.ToString() + ";" + "\n");
+                        //richTextBox2.Text = richTextBox1.Text.Replace("\n", ",\n");
+                    }
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "CopySQLtoC#")
+                {
+                    string character = @"\n";
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", " " + character + "\" + \n\"");
+                }
+                
+                else if (cmbOptions.SelectedItem.ToString() == "CopySQLtoJavaScript")
+                {
+                    string character = @"\n";
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "\" + \n\"");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Mirth | seperate")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", "|");
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Mirth deliminator")
+                {                    
+                    string ending = @"') + delimiter + results.getString('";
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", ending);
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Base64 Encrypt")
+                {                                       
+                    richTextBox2.Clear();
+                    richTextBox2.Text = ToBase64UNICODE(richTextBox1.Text);
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Base64 Decrypt")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = FromBase64UNICODE(richTextBox1.Text);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Contact Brad", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string ToBase64UNICODE(string text)
+        {
+            byte[] _DataArray = ASCIIEncoding.Unicode.GetBytes(text);
+            text = Convert.ToBase64String(_DataArray);
+
+            return text;
+        }
+
+        private string FromBase64UNICODE(string text)
+        {
+            try
+            {
+                byte[] _Base64Array = Convert.FromBase64String(text);
+                text = Encoding.Unicode.GetString(_Base64Array);
+
+                return text;
+            }
+
+            catch (Exception)
+            {
+                return "";
+            }
+        } 
+
+        private void Mail_message()
+        {
+            if (Internet.IsConnectedToInternet())
+            {
+                Rtf2Html rtf = new Rtf2Html();
+                string Html = (@"A login with the name of " + Environment.UserName + @" is using the Reformat program on the domain " + Environment.UserDomainName + @" and it is being ran from the system with the name of " + Environment.MachineName + ".");
+
+                string textBody = "<H4>Please open a case for " + Environment.UserName + " for the following errors and list the contact as Emmett Schulte</H4> \n" +
+                "<table border=\"1\"> \n" +
+                "<tr><th>Practice_name</th><th>Job_number</th><th>Job_name</th><th>Exit_code</th><th>Exit_description</th></tr> \n" +
+                "<td>Practice</td><td>job</td><td>job name</td><td>Exit</td><td>exit description</td>";
+                
+
+                MailMessage mail_message = new MailMessage();
+                mail_message.From = @"gbscorpbbp@gmail.com";
+                mail_message.To = @"bradleys@gbscorp.com";
+                mail_message.Subject = @"Reformat is started " + Environment.UserName;
+                mail_message.MailType = MailEncodingType.HTML;
+                mail_message.MailPriority = MailSendPriority.NORMAL;                     
+                mail_message.Message = Html;
+                //mail_message.Message = textBody;
+              
+
+                Thread thread = new Thread(new ParameterizedThreadStart(this.SendEmail));
+                try
+                {
+                    thread.Start(mail_message);
+                }
+
+                catch (Exception e)
+                {
+
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void SendEmail(object mail_msg)
+        {            
+            try
+            {
+                MailMessage mail_message = (MailMessage)mail_msg;                
+
+                SmtpClient smtp = new SmtpClient(@"smtp.gmail.com", Convert.ToInt32(@"587"));                
+                smtp.UserName = @"gbscorpbbp@gmail.com";
+                smtp.Password = @"User@1234";                 
+                smtp.SendMail(mail_message);                
+                //MessageBox.Show(this, "Email message has sent.", "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (SmtpClientException obj)
+            {
+                MessageBox.Show(this, obj.ErrorMessage, "Email Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
+
+}
