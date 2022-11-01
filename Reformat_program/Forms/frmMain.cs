@@ -532,8 +532,8 @@ namespace Reformat_program
                 MailMessage mail_message = (MailMessage)mail_msg;                
 
                 SmtpClient smtp = new SmtpClient(@"smtp.gmail.com", Convert.ToInt32(@"587"));                
-                smtp.UserName = @"app.soverns@gmail.com";
-                smtp.Password = @"It&FpTZrZ";  
+                smtp.UserName = @"@gmail.com";
+                smtp.Password = @"";  
                 smtp.SendMail(mail_message);                
             }
 
