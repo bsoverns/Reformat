@@ -32,8 +32,10 @@ namespace Reformat_program
             cmbOptions.Items.Add("SQL Reformat");
             cmbOptions.Items.Add("Add Commas");
             cmbOptions.Items.Add("Add Commas - Flat");
+            cmbOptions.Items.Add("Add Commas - Flat - No Spaces");
             cmbOptions.Items.Add("Ticks");
             cmbOptions.Items.Add("Ticks - Flat");
+            cmbOptions.Items.Add("Ticks - Flat - No Spaces");
             cmbOptions.Items.Add("JSON Beautify");
             cmbOptions.Items.Add("JSON Shrink");
             cmbOptions.Items.Add("Quotes");
@@ -102,7 +104,6 @@ namespace Reformat_program
                     richTextBox2.Text = richTextBox2.Text.Replace("\non", " on");
                     richTextBox2.Text = richTextBox2.Text.Replace("\r", "");
                     richTextBox2.Text = richTextBox2.Text.Replace("\n", "");
-
                 }
                 
                 else if (cmbOptions.SelectedItem.ToString() == "Add Commas")
@@ -117,6 +118,12 @@ namespace Reformat_program
                     richTextBox2.Text = richTextBox1.Text.Replace("\n", ", ");
                 }
 
+                else if (cmbOptions.SelectedItem.ToString() == "Add Commas - Flat - No Spaces")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = richTextBox1.Text.Replace("\n", ",");
+                }                
+
                 else if (cmbOptions.SelectedItem.ToString() == "Ticks")
                 {
                     richTextBox2.Clear();
@@ -127,6 +134,12 @@ namespace Reformat_program
                 {
                     richTextBox2.Clear();
                     richTextBox2.Text = @"'" + richTextBox1.Text.Replace("\n", "\', \'") + @"'";
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "Ticks - Flat - No Spaces")
+                {
+                    richTextBox2.Clear();
+                    richTextBox2.Text = @"'" + richTextBox1.Text.Replace("\n", "\',\'") + @"'";
                 }
 
                 else if (cmbOptions.SelectedItem.ToString() == "Quotes")
