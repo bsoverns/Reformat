@@ -38,6 +38,7 @@ namespace Reformat_program
             cmbOptions.Items.Add("Ticks - Flat - No Spaces");
             cmbOptions.Items.Add("JSON Beautify");
             cmbOptions.Items.Add("JSON Shrink");
+            cmbOptions.Items.Add("JSON Evaluate");
             cmbOptions.Items.Add("Quotes");
             cmbOptions.Items.Add("Quotes - Flat");
             cmbOptions.Items.Add("QUOTENAME([column_name], '\"')");
@@ -352,6 +353,7 @@ namespace Reformat_program
                     }
                 }
 
+              
                 else if (cmbOptions.SelectedItem.ToString() == "MSH Reformat")
                 {
                     richTextBox2.Clear();
@@ -429,6 +431,22 @@ namespace Reformat_program
                     }
 
                     richTextBox2.Text = reformatedData.ToString();
+                }
+
+                else if (cmbOptions.SelectedItem.ToString() == "JSON Evaluate")
+                {
+                    string password = txtPassword.Text;
+                    if (password.Length <= 32)
+                    {
+                        password = password + Key.Substring(password.Length);
+                        richTextBox2.Clear();
+                        richTextBox2.Text = EncryptionClass.Decrypt(richTextBox1.Text, password, IV);
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("The password is too long.  It must be less than 32 characters.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -558,16 +576,26 @@ namespace Reformat_program
 
         private void CheckConvertType(object sender, EventArgs e)
         {            
-            if (cmbOptions.SelectedItem.ToString() == "AES-256 Encrypt" || cmbOptions.SelectedItem.ToString() == "AES-256 Decrypt")
+            if (cmbOptions.SelectedItem.ToString() == "AES-256 Encrypt" || cmbOptions.SelectedItem.ToString() == "AES-256 Decrypt" )
             {
                 lblPassword.Visible = true;
                 lblPassword.Enabled = true;
                 txtPassword.Visible = true;
                 txtPassword.Enabled = true;
             }
-                       
+
+            else if (cmbOptions.SelectedItem.ToString() == "JSON Evaluate - Input Mask")
+            {
+                lblPassword.Text = "JSON Mask";
+                lblPassword.Visible = true;
+                lblPassword.Enabled = true;
+                txtPassword.Visible = true;
+                txtPassword.Enabled = true;
+            }          
+
             else
             {
+                lblPassword.Text = "Password(Limit - 32 characters)";
                 txtPassword.Text = "";
                 lblPassword.Visible = false;
                 lblPassword.Enabled = false;
