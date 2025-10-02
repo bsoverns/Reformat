@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|solutionrelative:reformat_program\\forms\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|c:\\sandbox\\reformat_alt\\reformat_program\\forms\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|C:\\Sandbox\\Reformat_Alt\\reformat_program\\forms\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|solutionrelative:reformat_program\\forms\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -55,9 +55,9 @@
               "Title": "frmMain.cs",
               "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\Reformat_program\\Forms\\frmMain.cs",
               "RelativeDocumentMoniker": "Reformat_program\\Forms\\frmMain.cs",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\Reformat_program\\Forms\\frmMain.cs*",
-              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\Reformat_program\\Forms\\frmMain.cs",
+              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.cs",
+              "ViewState": "AgIAAJkCAAAAAAAAAADwv6kCAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-29T18:18:40.319Z",
               "EditorCaption": ""
@@ -68,8 +68,8 @@
               "Title": "frmMain.cs [Design]",
               "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\Reformat_program\\Forms\\frmMain.cs",
               "RelativeDocumentMoniker": "Reformat_program\\Forms\\frmMain.cs",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\Reformat_program\\Forms\\frmMain.cs [Design]*",
-              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.cs [Design]*",
+              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\Reformat_program\\Forms\\frmMain.cs [Design]",
+              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-29T18:18:40.474Z",
               "EditorCaption": " [Design]"
