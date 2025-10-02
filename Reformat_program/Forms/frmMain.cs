@@ -18,14 +18,20 @@ using System.Threading;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
+
 
 namespace Reformat_program
 {
     public partial class frmMain : Form
     {
         string Key = "alio1j304klsk49fnhcvlslwie8tgxzj"; //32 CHARACTERS
-        string IV = "fjdkwnsksdjklfsk"; //16 CHARACTERS
-        
+        string IV = "fjdkwnsksdjklfsk"; //16 CHARACTERS                                        
+        private JToken _jsonRoot = null; // Cached JSON root (in-memory only)        
+        private System.Windows.Forms.Timer _debounceTimer = null; // Debounce timer for live mask typing
+
+
         public frmMain()
         {
             InitializeComponent();
@@ -38,6 +44,7 @@ namespace Reformat_program
             cmbOptions.Items.Add("Ticks - Flat - No Spaces");
             cmbOptions.Items.Add("JSON Beautify");
             cmbOptions.Items.Add("JSON Shrink");
+            cmbOptions.Items.Add("JSON Evaluate");
             cmbOptions.Items.Add("Quotes");
             cmbOptions.Items.Add("Quotes - Flat");
             cmbOptions.Items.Add("QUOTENAME([column_name], '\"')");
@@ -66,6 +73,102 @@ namespace Reformat_program
             //cmbOptions.SelectedItem = "Add Commas";
             cmbOptions.SelectedItem = "SQL Reformat";
             //Mail_message();  
+
+            // Debounce for live updates while typing mask
+            _debounceTimer = new System.Windows.Forms.Timer();
+            _debounceTimer.Interval = 250; // ms
+            _debounceTimer.Tick += (s, e) =>
+            {
+                _debounceTimer.Stop();
+                if (cmbOptions.SelectedItem?.ToString() == "JSON Evaluate")
+                {
+                    EvaluateJsonPathToBottomBox(txtPassword.Text);
+                }
+            };
+
+            // When typing in the "mask" box (reusing txtPassword), auto-evaluate
+            txtPassword.TextChanged += (s, e) =>
+            {
+                if (cmbOptions.SelectedItem?.ToString() == "JSON Evaluate")
+                {
+                    Debounce();
+                }
+            };
+
+            // Also re-parse the JSON whenever the top box changes (kept simple)
+            richTextBox1.TextChanged += (s, e) =>
+            {
+                if (cmbOptions.SelectedItem?.ToString() == "JSON Evaluate")
+                {
+                    _jsonRoot = null; // force re-parse on next evaluation
+                    Debounce();
+                }
+            };
+        }
+        private void Debounce()
+        {
+            _debounceTimer.Stop();
+            _debounceTimer.Start();
+        }
+
+        private bool EnsureJsonParsed()
+        {
+            if (_jsonRoot != null) return true;
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(richTextBox1.Text))
+                {
+                    richTextBox2.Clear();
+                    return false;
+                }
+
+                _jsonRoot = JToken.Parse(richTextBox1.Text);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _jsonRoot = null;
+                richTextBox2.Text = $"[Parse error] {ex.Message}";
+                return false;
+            }
+        }
+        private void EvaluateJsonPathToBottomBox(string mask)
+        {
+            try
+            {
+                if (!EnsureJsonParsed()) return;
+
+                // Empty mask => pretty print entire JSON
+                if (string.IsNullOrWhiteSpace(mask))
+                {
+                    richTextBox2.Text = _jsonRoot.ToString(Formatting.Indented);
+                    return;
+                }
+
+                var matches = _jsonRoot.SelectTokens(mask, errorWhenNoMatch: false);
+
+                var sb = new StringBuilder();
+                int count = 0;
+                foreach (var t in matches)
+                {
+                    if (t is JValue v)
+                    {
+                        sb.AppendLine(v.ToString(CultureInfo.InvariantCulture));
+                    }
+                    else
+                    {
+                        sb.AppendLine(t.ToString(Formatting.Indented));
+                    }
+                    count++;
+                }
+
+                richTextBox2.Text = (count == 0) ? "[No matches]" : sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                richTextBox2.Text = $"[JSONPath error] {ex.Message}";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -352,6 +455,7 @@ namespace Reformat_program
                     }
                 }
 
+              
                 else if (cmbOptions.SelectedItem.ToString() == "MSH Reformat")
                 {
                     richTextBox2.Clear();
@@ -430,6 +534,14 @@ namespace Reformat_program
 
                     richTextBox2.Text = reformatedData.ToString();
                 }
+
+                else if (cmbOptions.SelectedItem.ToString() == "JSON Evaluate")
+                {
+                    // Reuse txtPassword as the JSONPath mask input
+                    var mask = txtPassword.Text?.Trim() ?? "";
+                    EvaluateJsonPathToBottomBox(mask);
+                }
+
             }
             catch (Exception ex)
             {
@@ -558,16 +670,28 @@ namespace Reformat_program
 
         private void CheckConvertType(object sender, EventArgs e)
         {            
-            if (cmbOptions.SelectedItem.ToString() == "AES-256 Encrypt" || cmbOptions.SelectedItem.ToString() == "AES-256 Decrypt")
+            if (cmbOptions.SelectedItem.ToString() == "AES-256 Encrypt" || cmbOptions.SelectedItem.ToString() == "AES-256 Decrypt" )
             {
                 lblPassword.Visible = true;
                 lblPassword.Enabled = true;
                 txtPassword.Visible = true;
                 txtPassword.Enabled = true;
             }
-                       
+
+            else if (cmbOptions.SelectedItem.ToString() == "JSON Evaluate")
+            {
+                lblPassword.Text = "JSON Evaluate - Input Mask";
+                txtPassword.PasswordChar = '\0'; // show plain text for mask
+                lblPassword.Visible = true;
+                lblPassword.Enabled = true;
+                txtPassword.Visible = true;
+                txtPassword.Enabled = true;
+                
+            }          
+
             else
             {
+                lblPassword.Text = "Password(Limit - 32 characters)";
                 txtPassword.Text = "";
                 lblPassword.Visible = false;
                 lblPassword.Enabled = false;
