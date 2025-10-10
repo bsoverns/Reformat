@@ -1,0 +1,99 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|c:\\sandbox\\reformat_alt\\winformreformat\\reformat_program\\classes\\encryptionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|solutionrelative:reformat_program\\classes\\encryptionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|c:\\sandbox\\reformat_alt\\winformreformat\\reformat_program\\forms\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|solutionrelative:reformat_program\\forms\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\reformat_program\\forms\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|solutionrelative:reformat_program\\forms\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\reformat_program\\forms\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5CF5C52-2AAF-41D3-9A0D-A92111A9F818}|Reformat_program\\Reformat.csproj|solutionrelative:reformat_program\\forms\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EncryptionClass.cs",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Classes\\EncryptionClass.cs",
+              "RelativeDocumentMoniker": "Reformat_program\\Classes\\EncryptionClass.cs",
+              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Classes\\EncryptionClass.cs",
+              "RelativeToolTip": "Reformat_program\\Classes\\EncryptionClass.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAowEcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T00:17:58.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "frmMain.Designer.cs",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Forms\\frmMain.Designer.cs",
+              "RelativeDocumentMoniker": "Reformat_program\\Forms\\frmMain.Designer.cs",
+              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Forms\\frmMain.Designer.cs",
+              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T12:16:39.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmMain.cs",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Forms\\frmMain.cs",
+              "RelativeDocumentMoniker": "Reformat_program\\Forms\\frmMain.cs",
+              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Forms\\frmMain.cs",
+              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.cs",
+              "ViewState": "AgIAAJkBAAAAAAAAAAAewKsBAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T18:18:40.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmMain.cs [Design]",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Forms\\frmMain.cs",
+              "RelativeDocumentMoniker": "Reformat_program\\Forms\\frmMain.cs",
+              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WinFormReformat\\Reformat_program\\Forms\\frmMain.cs [Design]",
+              "RelativeToolTip": "Reformat_program\\Forms\\frmMain.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T18:18:40.474Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

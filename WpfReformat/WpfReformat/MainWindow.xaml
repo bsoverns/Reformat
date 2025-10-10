@@ -1,0 +1,245 @@
+﻿<Window x:Class="WpfReformat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Reformat - Paste your list into top box, click convert, copy data from bottom box"
+        Height="526" Width="840"
+        MinWidth="840" MinHeight="526"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize"         
+        SizeToContent="Manual"    
+        Background="#1E2A3A"
+        Foreground="#F5F5F5" >
+
+    <Window.Resources>
+        <!-- Core Colors -->
+        <SolidColorBrush x:Key="PrimaryBackground" Color="#1E2A3A"/>
+        <SolidColorBrush x:Key="PrimaryAccent"      Color="#2E6FDB"/>
+        <SolidColorBrush x:Key="SecondaryAccent"    Color="#E63946"/>
+        <SolidColorBrush x:Key="HighlightAccent"    Color="#E5C39B"/>
+        <SolidColorBrush x:Key="TextForeground"     Color="#F5F5F5"/>
+        <SolidColorBrush x:Key="BorderBrush"        Color="#3B4A5C"/>
+        <SolidColorBrush x:Key="InputBackground"    Color="#253445"/>
+        <SolidColorBrush x:Key="DropdownBackground" Color="#1F2B3B"/>
+        <SolidColorBrush x:Key="DropdownHover"      Color="#2C3C52"/>
+
+        <!-- Rounded BUTTON via template (no CornerRadius setter on Button) -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding"    Value="10,6"/>
+            <Setter Property="Margin"     Value="2"/>
+            <Setter Property="Cursor"     Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd"
+                        Background="{StaticResource PrimaryAccent}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="{StaticResource SecondaryAccent}"/>
+                                <Setter TargetName="bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="8" Color="#E5C39B" ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="bd" Property="Opacity" Value="0.6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- TextBox (dark inputs for small fields only; editors will be white locally) -->
+        <Style TargetType="TextBox" x:Key="DarkInput">
+            <Setter Property="Background"    Value="{StaticResource InputBackground}"/>
+            <Setter Property="Foreground"    Value="{StaticResource TextForeground}"/>
+            <Setter Property="BorderBrush"   Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding"       Value="4"/>
+            <Setter Property="CaretBrush"    Value="{StaticResource HighlightAccent}"/>
+        </Style>
+
+        <!-- PasswordBox to match DarkInput -->
+        <Style TargetType="PasswordBox">
+            <Setter Property="Background"    Value="{StaticResource InputBackground}"/>
+            <Setter Property="Foreground"    Value="{StaticResource TextForeground}"/>
+            <Setter Property="BorderBrush"   Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding"       Value="4"/>
+            <Setter Property="CaretBrush"    Value="{StaticResource HighlightAccent}"/>
+        </Style>
+
+        <!-- Label: keep readable even when IsEnabled=false -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="{StaticResource TextForeground}"/>
+            <Setter Property="Opacity"    Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <!-- slightly dim but still readable -->
+                    <Setter Property="Foreground" Value="#D6DEE9"/>
+                    <Setter Property="Opacity"    Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- ComboBox + Items: readable dropdown -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background"      Value="{StaticResource InputBackground}"/>
+            <Setter Property="Foreground"      Value="{StaticResource PrimaryAccent}" />
+            <Setter Property="BorderBrush"     Value="{StaticResource PrimaryAccent}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height"          Value="25"/>
+            <Setter Property="FontWeight"      Value="SemiBold"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="{StaticResource DropdownBackground}"/>
+                        <Setter Property="Foreground" Value="{StaticResource TextForeground}"/>
+                        <Setter Property="Padding"    Value="6,4"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource DropdownHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource PrimaryAccent}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Top editor -->
+            <RowDefinition Height="Auto"/>
+            <!-- Controls row: stays at control height -->
+            <RowDefinition Height="*"/>
+            <!-- Bottom editor -->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- 0: Convert -->
+            <ColumnDefinition Width="10"/>
+            <!-- 1: gap -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- 2: Combo -->
+            <ColumnDefinition Width="10"/>
+            <!-- 3: gap -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- 4: Label -->
+            <ColumnDefinition Width="10"/>
+            <!-- 5: gap -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- 6: Password/Mask (no stretch) -->
+            <ColumnDefinition Width="*"/>
+            <!-- 7: spacer eats the rest -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Top RichTextBox -->
+        <!--<RichTextBox x:Name="rtbInput"
+             Grid.Row="0" Grid.ColumnSpan="7"
+             FontFamily="Courier New" FontSize="12"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Auto"
+             SpellCheck.IsEnabled="False">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>-->
+
+        <TextBox x:Name="tbInput"
+             Grid.Row="0" Grid.ColumnSpan="8"
+             FontFamily="Courier New" FontSize="14"
+             AcceptsReturn="True" AcceptsTab="True"
+             TextWrapping="NoWrap"
+             VerticalScrollBarVisibility="Auto"
+             HorizontalScrollBarVisibility="Auto"
+             Background="White" Foreground="Black"
+             CaretBrush="Black" />
+
+        <!-- Convert button -->
+        <Button x:Name="btnConvert"
+            Grid.Row="1" Grid.Column="0"
+            Content="Convert" Width="75" Height="23"
+            VerticalAlignment="Center"
+            Click="BtnProcessClick" />        
+        
+        <!-- Options -->
+        <ComboBox x:Name="cmbOptions"
+            Grid.Row="1" Grid.Column="2"
+            Height="23" Width="200"
+            IsEditable="False"
+            SelectionChanged="CmbOptions_SelectionChanged" />
+
+        <!-- Label -->
+        <Label x:Name="lblPassword"
+            FontFamily="Courier New" FontSize="12"
+            Grid.Row="1" Grid.Column="4"
+            Content="Password (Limit - 32 characters)"
+            VerticalAlignment="Center"
+            Visibility="Collapsed"
+            Height="23"
+            IsEnabled="False" />
+
+        <!-- Stack two inputs in same cell; we toggle them -->
+        <Grid Grid.Row="1" Grid.Column="6"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left">
+            <!-- key: don’t stretch -->
+            <PasswordBox x:Name="pbPassword"
+                Height="23"
+                Visibility="Collapsed"
+                IsEnabled="False"
+                MaxLength="32" 
+                MinWidth="200" />
+            <TextBox x:Name="txtMask"
+                FontFamily="Courier New" FontSize="12"
+                Height="23"
+                Visibility="Collapsed"
+                IsEnabled="False"
+                MinWidth="200" />
+            <!-- optional: give it a comfy width -->
+        </Grid>
+
+
+        <!-- Bottom RichTextBox -->
+        <!--<RichTextBox x:Name="rtbOutput"
+                     Grid.Row="2" Grid.ColumnSpan="7"
+                     FontFamily="Courier New" FontSize="12"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto" 
+                     SpellCheck.IsEnabled="False" >
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>-->
+
+        <TextBox x:Name="tbOutput"
+             Grid.Row="2" Grid.ColumnSpan="8"
+             FontFamily="Courier New" FontSize="14"
+             AcceptsReturn="True" IsReadOnly="True"
+             TextWrapping="NoWrap"
+             VerticalScrollBarVisibility="Auto"
+             HorizontalScrollBarVisibility="Auto"
+             Background="White" Foreground="Black"
+             CaretBrush="Black" />
+    </Grid>
+</Window>
