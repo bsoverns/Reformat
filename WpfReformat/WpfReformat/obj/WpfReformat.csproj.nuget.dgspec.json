@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
-        "projectName": "WpfReformat",
+        "projectName": "Reformat",
         "projectPath": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
         "packagesPath": "C:\\Users\\bsove\\.nuget\\packages\\",
         "outputPath": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\obj\\",

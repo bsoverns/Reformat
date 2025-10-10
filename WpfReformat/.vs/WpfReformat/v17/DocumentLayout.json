@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\wpfreformat.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\wpfreformat.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\wpfreformat.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\wpfreformat.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\classes\\encryptionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,14 +46,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "WpfReformat",
               "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
               "RelativeDocumentMoniker": "WpfReformat\\WpfReformat.csproj",
               "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
               "RelativeToolTip": "WpfReformat\\WpfReformat.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-10T03:49:10.933Z"
+              "WhenOpened": "2025-10-10T04:49:04.955Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,19 +81,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml",
               "RelativeDocumentMoniker": "WpfReformat\\MainWindow.xaml",
               "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml",
               "RelativeToolTip": "WpfReformat\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-09T13:53:01.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-09T13:53:01.037Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "WpfReformat\\MainWindow.xaml.cs",
@@ -100,8 +100,7 @@
               "RelativeToolTip": "WpfReformat\\MainWindow.xaml.cs",
               "ViewState": "AgIAABkCAAAAAAAAAAAgwHoAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T13:52:56.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-09T13:52:56.445Z"
             }
           ]
         }
