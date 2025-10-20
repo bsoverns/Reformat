@@ -64,15 +64,13 @@ I’ll try to keep this README updated going forward.
 
 ### JSON and XML
 
-- **JSON Beautify**  
+- **JSON Evaluate** 
   Pretty-print minified or ugly JSON.
+  Parse once and evaluate a JSONPath mask (e.g., `$.items[*].price`).  
+  Results stream into the bottom box.
 
 - **JSON Shrink**  
   Minify JSON by stripping unnecessary whitespace outside of string values.
-
-- **JSON Evaluate**  
-  Parse once and evaluate a JSONPath mask (e.g., `$.items[*].price`).  
-  Results stream into the bottom box.
 
 - **XML ⇒ JSON**  
   Convert XML into JSON text via a straightforward mapping.
