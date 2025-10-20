@@ -111,7 +111,7 @@
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Background" Value="{StaticResource PrimaryAccent}"/>
-                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -167,7 +167,7 @@
              Grid.Row="0" Grid.ColumnSpan="8"
              FontFamily="Courier New" FontSize="14"
              AcceptsReturn="True" AcceptsTab="True"
-             TextWrapping="NoWrap"
+             TextWrapping="Wrap"
              VerticalScrollBarVisibility="Auto"
              HorizontalScrollBarVisibility="Auto"
              Background="White" Foreground="Black"
@@ -208,12 +208,21 @@
                 IsEnabled="False"
                 MaxLength="32" 
                 MinWidth="200" />
-            <TextBox x:Name="txtMask"
+            <!--<TextBox x:Name="txtMask"
                 FontFamily="Courier New" FontSize="12"
                 Height="23"
                 Visibility="Collapsed"
                 IsEnabled="False"
-                MinWidth="200" />
+                MinWidth="200" />-->
+            <TextBox x:Name="txtMask"
+                 FontFamily="Courier New"
+                 FontSize="12"
+                 Height="23"
+                 Visibility="Collapsed"
+                 IsEnabled="False"
+                 MinWidth="200"
+                 VerticalContentAlignment="Center"
+                 Padding="3,0,3,0" />
             <!-- optional: give it a comfy width -->
         </Grid>
 
@@ -236,7 +245,7 @@
              Grid.Row="2" Grid.ColumnSpan="8"
              FontFamily="Courier New" FontSize="14"
              AcceptsReturn="True" IsReadOnly="True"
-             TextWrapping="NoWrap"
+             TextWrapping="Wrap"
              VerticalScrollBarVisibility="Auto"
              HorizontalScrollBarVisibility="Auto"
              Background="White" Foreground="Black"

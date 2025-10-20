@@ -1,25 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\",
+  "WorkspaceRootPath": "C:\\Sandbox\\Reformat\\WpfReformat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\wpfreformat.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\wpfreformat.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat\\wpfreformat\\wpfreformat\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\classes\\encryptionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat\\wpfreformat\\wpfreformat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat\\wpfreformat\\wpfreformat\\classes\\encryptionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\classes\\encryptionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat_alt\\wpfreformat\\wpfreformat\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|c:\\sandbox\\reformat\\wpfreformat\\wpfreformat\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{4BEF8068-B6B9-4C6B-BBFF-3FAF75C34E1B}|WpfReformat\\WpfReformat.csproj|solutionrelative:wpfreformat\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -30,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,23 +42,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "WpfReformat",
-              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
-              "RelativeDocumentMoniker": "WpfReformat\\WpfReformat.csproj",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
-              "RelativeToolTip": "WpfReformat\\WpfReformat.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-10T04:49:04.955Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "EncryptionClass.cs",
-              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\Classes\\EncryptionClass.cs",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\Classes\\EncryptionClass.cs",
               "RelativeDocumentMoniker": "WpfReformat\\Classes\\EncryptionClass.cs",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\Classes\\EncryptionClass.cs",
+              "ToolTip": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\Classes\\EncryptionClass.cs",
               "RelativeToolTip": "WpfReformat\\Classes\\EncryptionClass.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -70,37 +54,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\App.xaml",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\App.xaml",
               "RelativeDocumentMoniker": "WpfReformat\\App.xaml",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\App.xaml",
+              "ToolTip": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\App.xaml",
               "RelativeToolTip": "WpfReformat\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-09T17:33:23.948Z"
+              "WhenOpened": "2025-10-09T17:33:23.948Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\MainWindow.xaml",
               "RelativeDocumentMoniker": "WpfReformat\\MainWindow.xaml",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml",
+              "ToolTip": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\MainWindow.xaml",
               "RelativeToolTip": "WpfReformat\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-09T13:53:01.037Z"
+              "WhenOpened": "2025-10-09T13:53:01.037Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "WpfReformat\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\MainWindow.xaml.cs",
               "RelativeToolTip": "WpfReformat\\MainWindow.xaml.cs",
-              "ViewState": "AgIAABkCAAAAAAAAAAAgwHoAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAMwCIAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-09T13:52:56.445Z"
+              "WhenOpened": "2025-10-09T13:52:56.445Z",
+              "EditorCaption": ""
             }
           ]
         }

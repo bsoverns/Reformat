@@ -16,10 +16,10 @@ namespace WpfReformat
         private const string Key = "alio1j304klsk49fnhcvlslwie8tgxzj"; // 32
         private const string IV = "fjdkwnsksdjklfsk";                 // 16
 
-        private JToken? _jsonRoot = null;        // cached JSON for JSON Evaluate
+        private JToken? _jsonRoot = null;        // cached JSON for JSON Beautify/Evaluate
         private DispatcherTimer? _debounceTimer; // debounce for live mask typing
 
-        private readonly List<string> processList = new List<string>() { "SQL Reformat", "Add Commas", "Add Commas - Flat", "Add Commas - Flat - No Spaces", "Ticks", "Ticks - Flat", "Ticks - Flat - No Spaces", "JSON Beautify", "JSON Shrink", "JSON Evaluate", "Quotes", "Quotes - Flat", "QUOTENAME([column_name], '\"')", "SQL NVARCHAR[255]", "837/835", "Comma Split", "{ get; set; }", "{ get; set; } => Properties only", "Class list", "CopySQLtoC#", "CopySQLtoJavaScript", "Json Split Variables", "Json Class Objects", "Mirth | seperate", "Mirth , seperate", "Mirth deliminator", "Mirth quoted deliminator", "Base64 Encrypt", "Base64 Decrypt", "AES-256 Encrypt", "AES-256 Decrypt", "MSH Reformat", "Replace Feeds", "HL7 Breakdown", "XML => JSON" };
+        private readonly List<string> processList = new List<string>() { "SQL Reformat", "Add Commas", "Add Commas - Flat", "Add Commas - Flat - No Spaces", "Ticks", "Ticks - Flat", "Ticks - Flat - No Spaces", "JSON Beautify/Evaluate", "JSON Shrink", "Quotes", "Quotes - Flat", "QUOTENAME([column_name], '\"')", "SQL NVARCHAR[255]", "837/835", "Comma Split", "{ get; set; }", "{ get; set; } => Properties only", "Class list", "CopySQLtoC#", "CopySQLtoJavaScript", "Json Split Variables", "Json Class Objects", "Mirth | seperate", "Mirth , seperate", "Mirth deliminator", "Mirth quoted deliminator", "Base64 Encrypt", "Base64 Decrypt", "AES-256 Encrypt", "AES-256 Decrypt", "MSH Reformat", "Replace Feeds", "HL7 Breakdown", "XML => JSON" };
         private string defaultProcess = "SQL Reformat";
 
         public MainWindow()
@@ -32,7 +32,7 @@ namespace WpfReformat
             _debounceTimer.Tick += (s, e) =>
             {
                 _debounceTimer!.Stop();
-                if (GetSelectedOptionText(cmbOptions) == "JSON Evaluate")
+                if (GetSelectedOptionText(cmbOptions) == "JSON Beautify/Evaluate")
                 {
                     EvaluateJsonPathToBottomBox(txtMask.Text);
                 }
@@ -40,7 +40,7 @@ namespace WpfReformat
 
             tbInput.TextChanged += (s, e) =>
             {
-                if (GetSelectedOptionText(cmbOptions) == "JSON Evaluate")
+                if (GetSelectedOptionText(cmbOptions) == "JSON Beautify/Evaluate")
                 {
                     _jsonRoot = null; // force re-parse next time
                     Debounce();
@@ -49,7 +49,7 @@ namespace WpfReformat
             
             txtMask.TextChanged += (s, e) =>
             {
-                if (GetSelectedOptionText(cmbOptions) == "JSON Evaluate")
+                if (GetSelectedOptionText(cmbOptions) == "JSON Beautify/Evaluate")
                     Debounce();
             };
         }
@@ -83,9 +83,9 @@ namespace WpfReformat
                 txtMask.Visibility = Visibility.Collapsed;
                 txtMask.IsEnabled = false;
             }
-            else if (opt == "JSON Evaluate")
+            else if (opt == "JSON Beautify/Evaluate")
             {
-                lblPassword.Content = "JSON Evaluate - Input Mask";
+                lblPassword.Content = "JSON Beautify/Evaluate - Input Mask";
                 lblPassword.Visibility = Visibility.Visible;
                 lblPassword.IsEnabled = true;
 
@@ -133,7 +133,7 @@ namespace WpfReformat
 
         private static string NL(string s) => (s ?? string.Empty).Replace("\r\n", "\n").Replace("\r", "\n");
 
-        // ---- JSON Evaluate ----
+        // ---- JSON Beautify/Evaluate ----
         private bool EnsureJsonParsed()
         {
             if (_jsonRoot != null) return true;
@@ -268,14 +268,19 @@ namespace WpfReformat
                             oldText = Regex.Replace(oldText, @"\s+on\b", " on", RegexOptions.IgnoreCase);
                             oldText = oldText.Replace("\n", "");
                             var parts = oldText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                               .Select(p => p.Trim()).Where(p => p.Length > 0);
+                                                .Select(p => p.Trim()).Where(p => p.Length > 0);
                             output = string.Join(", ", parts);
                             break;
                         }
 
-                    case "Add Commas": output = NL(input).Replace("\n", ",\n"); break;
-                    case "Add Commas - Flat": output = NL(input).Replace("\n", ", "); break;
-                    case "Add Commas - Flat - No Spaces": output = NL(input).Replace("\n", ","); break;
+                    case "Add Commas":
+                        output = NL(input).Replace("\n", ",\n"); break;
+
+                    case "Add Commas - Flat": 
+                        output = NL(input).Replace("\n", ", "); break;
+
+                    case "Add Commas - Flat - No Spaces":
+                        output = NL(input).Replace("\n", ","); break;
 
                     case "Ticks":
                         {
@@ -283,12 +288,14 @@ namespace WpfReformat
                             output = "'" + s.Replace("\n", "',\n'") + "'";
                             break;
                         }
+
                     case "Ticks - Flat":
                         {
                             var s = NL(input).Trim('\n');
                             output = "'" + s.Replace("\n", "', '") + "'";
                             break;
                         }
+
                     case "Ticks - Flat - No Spaces":
                         {
                             var s = NL(input).Trim('\n');
@@ -302,6 +309,7 @@ namespace WpfReformat
                             output = "\"" + s.Replace("\n", "\",\n\"") + "\"";
                             break;
                         }
+
                     case "Quotes - Flat":
                         {
                             var s = NL(input).Trim('\n');
@@ -322,31 +330,36 @@ namespace WpfReformat
                             foreach (var col in tokens)
                             {
                                 sb.Append('[')
-                                  .Append(col)
-                                  .Append("]  NULL,")
-                                  .Append("\n\t");
+                                    .Append(col)
+                                    .Append("]  NULL,")
+                                    .Append("\n\t");
                             }
                             output = sb.ToString();
                             break;
                         }
 
-                    case "837/835": output = input.Replace("~", "~\n"); break;
-                    case "Comma Split": output = input.Replace(",", ",\n"); break;
-                    case "GUID": output = input.Replace("~", "\n"); break;
+                    case "837/835": 
+                        output = input.Replace("~", "~\n"); break;
+
+                    case "Comma Split": 
+                        output = input.Replace(",", ",\n"); break;
+
+                    case "GUID": 
+                        output = input.Replace("~", "\n"); break;
 
                     case "{ get; set; }":
                         {
                             var tokens = NL(input).Replace(" ", "")
-                                                  .Split(new[] { "\n", "," }, StringSplitOptions.None)
-                                                  .Where(t => !string.IsNullOrWhiteSpace(t));
+                                                    .Split(new[] { "\n", "," }, StringSplitOptions.None)
+                                                    .Where(t => !string.IsNullOrWhiteSpace(t));
                             var sb = new StringBuilder();
                             foreach (var name in tokens)
                             {
                                 sb.Append("public string ").Append(name).Append('\n')
-                                  .Append("{\n")
-                                  .Append("    get { return _").Append(name).Append("; }\n")
-                                  .Append("    set { this._").Append(name).Append(" = value; }\n")
-                                  .Append("}\n\n");
+                                    .Append("{\n")
+                                    .Append("    get { return _").Append(name).Append("; }\n")
+                                    .Append("    set { this._").Append(name).Append(" = value; }\n")
+                                    .Append("}\n\n");
                             }
                             output = sb.ToString();
                             break;
@@ -355,8 +368,8 @@ namespace WpfReformat
                     case "{ get; set; } => Properties only":
                         {
                             var tokens = NL(input).Replace(" ", "")
-                                                  .Split(new[] { "\n", "," }, StringSplitOptions.None)
-                                                  .Where(t => !string.IsNullOrWhiteSpace(t));
+                                                    .Split(new[] { "\n", "," }, StringSplitOptions.None)
+                                                    .Where(t => !string.IsNullOrWhiteSpace(t));
                             var sb = new StringBuilder();
                             foreach (var name in tokens)
                                 sb.Append("public string ").Append(name).Append(" { get; set; }").Append('\n');
@@ -367,8 +380,8 @@ namespace WpfReformat
                     case "Class list":
                         {
                             var tokens = NL(input).Replace(" ", "")
-                                                  .Split(new[] { "\n", "," }, StringSplitOptions.None)
-                                                  .Where(t => !string.IsNullOrWhiteSpace(t));
+                                                    .Split(new[] { "\n", "," }, StringSplitOptions.None)
+                                                    .Where(t => !string.IsNullOrWhiteSpace(t));
                             var sb = new StringBuilder();
                             foreach (var name in tokens)
                                 sb.Append("this._").Append(name).Append(" = ").Append(name).Append(";").Append('\n');
@@ -388,19 +401,20 @@ namespace WpfReformat
                         output = NL(input).Replace("\n", " \" \n+ \"\\r\\n");
                         break;
 
-                    case "JSON Beautify":
-                        {
-                            var jsonObj = JsonConvert.DeserializeObject(input);
-                            output = jsonObj != null ? JsonConvert.SerializeObject(jsonObj, Formatting.Indented)
-                                                     : "[Parse error]";
-                            break;
-                        }
+                    //Replace with the beautify method above to reduce unnecessary code
+                    //case "JSON Beautify":
+                    //    {
+                    //        var jsonObj = JsonConvert.DeserializeObject(input);
+                    //        output = jsonObj != null ? JsonConvert.SerializeObject(jsonObj, Formatting.Indented)
+                    //                                    : "[Parse error]";
+                    //        break;
+                    //    }
 
                     case "JSON Shrink":
                         output = Regex.Replace(input, "(\"(?:[^\"\\\\]|\\\\.)*\")|\\s+", "$1");
                         break;
 
-                    case "JSON Evaluate":
+                    case "JSON Beautify/Evaluate":
                         EvaluateJsonPathToBottomBox(txtMask.Text?.Trim() ?? "");
                         return; // already wrote to bottom box
 
@@ -438,10 +452,10 @@ namespace WpfReformat
                                         {
                                             if (!string.IsNullOrEmpty(field))
                                                 reformatted.Append("\r\n")
-                                                           .Append(columnName).Append('.')
-                                                           .Append(columnCounter).Append('.')
-                                                           .Append(fieldCounter).Append(": ")
-                                                           .Append(field);
+                                                            .Append(columnName).Append('.')
+                                                            .Append(columnCounter).Append('.')
+                                                            .Append(fieldCounter).Append(": ")
+                                                            .Append(field);
                                             fieldCounter++;
                                         }
                                     }
@@ -463,14 +477,19 @@ namespace WpfReformat
                             break;
                         }
 
-                    case "Mirth | seperate": output = NL(input).Replace("\n", "|"); break;
-                    case "Mirth , seperate": output = NL(input).Replace("\n", ","); break;
+                    case "Mirth | seperate": 
+                        output = NL(input).Replace("\n", "|"); break;
+
+                    case "Mirth , seperate": 
+                         output = NL(input).Replace("\n", ","); break;
+
                     case "Mirth deliminator":
                         {
                             string ending = @"') + delimiter + results.getString('";
                             output = NL(input).Replace("\n", ending);
                             break;
                         }
+
                     case "Mirth quoted deliminator":
                         {
                             string ending = @"') + quote + delimiter + quote + results.getString('";
@@ -481,7 +500,7 @@ namespace WpfReformat
                     case "Json Split Variables":
                         {
                             var lines = NL(input).Replace(" ", "")
-                                                 .Split(new[] { "\n", "," }, StringSplitOptions.None);
+                                                    .Split(new[] { "\n", "," }, StringSplitOptions.None);
                             var sb = new StringBuilder();
                             foreach (var line in lines)
                             {
@@ -501,22 +520,25 @@ namespace WpfReformat
                     case "Json Class Objects":
                         {
                             var lines = NL(input).Replace(" ", "")
-                                                 .Split(new[] { "\n", "," }, StringSplitOptions.None);
+                                                    .Split(new[] { "\n", "," }, StringSplitOptions.None);
                             var sb = new StringBuilder();
                             foreach (var line in lines)
                             {
                                 if (string.IsNullOrWhiteSpace(line)) continue;
                                 var name = line.Trim();
                                 sb.Append("[JsonProperty(\"").Append(name).Append("\")]\n")
-                                  .Append("public string ").Append(name).Append(" { get; set; }")
-                                  .Append("\r\n\r\n");
+                                    .Append("public string ").Append(name).Append(" { get; set; }")
+                                    .Append("\r\n\r\n");
                             }
                             output = sb.ToString();
                             break;
                         }
 
-                    case "Base64 Encrypt": output = ToBase64Unicode(input); break;
-                    case "Base64 Decrypt": output = FromBase64Unicode(input); break;
+                    case "Base64 Encrypt": 
+                        output = ToBase64Unicode(input); break;
+
+                    case "Base64 Decrypt": 
+                        output = FromBase64Unicode(input); break;
 
                     case "AES-256 Encrypt":
                         {
