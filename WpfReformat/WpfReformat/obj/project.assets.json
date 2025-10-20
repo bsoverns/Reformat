@@ -61,11 +61,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
+      "projectUniqueName": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
       "projectName": "Reformat",
-      "projectPath": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
+      "projectPath": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\WpfReformat.csproj",
       "packagesPath": "C:\\Users\\bsove\\.nuget\\packages\\",
-      "outputPath": "C:\\Sandbox\\Reformat_Alt\\WpfReformat\\WpfReformat\\obj\\",
+      "outputPath": "C:\\Sandbox\\Reformat\\WpfReformat\\WpfReformat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
