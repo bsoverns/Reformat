@@ -124,7 +124,7 @@ Or open `WpfReformat/WpfReformat.sln` in Visual Studio 2022. The executable is `
 To get a single self-contained exe:
 
 ```bash
-dotnet publish WpfReformat/WpfReformat/WpfReformat.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true
+dotnet publish WpfReformat/WpfReformat/WpfReformat.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true
 ```
 
 ---
