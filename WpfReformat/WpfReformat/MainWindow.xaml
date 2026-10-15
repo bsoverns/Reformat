@@ -125,9 +125,11 @@
             <RowDefinition Height="*"/>
             <!-- Top editor -->
             <RowDefinition Height="Auto"/>
-            <!-- Controls row: stays at control height -->
+            <!-- Controls row -->
             <RowDefinition Height="*"/>
             <!-- Bottom editor -->
+            <RowDefinition Height="Auto"/>
+            <!-- Status / output actions -->
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -149,20 +151,6 @@
             <!-- 7: spacer eats the rest -->
         </Grid.ColumnDefinitions>
 
-        <!-- Top RichTextBox -->
-        <!--<RichTextBox x:Name="rtbInput"
-             Grid.Row="0" Grid.ColumnSpan="7"
-             FontFamily="Courier New" FontSize="12"
-             AcceptsReturn="True"
-             VerticalScrollBarVisibility="Auto"
-             SpellCheck.IsEnabled="False">
-            <RichTextBox.Resources>
-                <Style TargetType="{x:Type Paragraph}">
-                    <Setter Property="Margin" Value="0"/>
-                </Style>
-            </RichTextBox.Resources>
-        </RichTextBox>-->
-
         <TextBox x:Name="tbInput"
              Grid.Row="0" Grid.ColumnSpan="8"
              FontFamily="Courier New" FontSize="14"
@@ -173,47 +161,55 @@
              Background="White" Foreground="Black"
              CaretBrush="Black" />
 
-        <!-- Convert button -->
+        <!-- Convert button (Ctrl+Enter) -->
         <Button x:Name="btnConvert"
             Grid.Row="1" Grid.Column="0"
-            Content="Convert" Width="75" Height="23"
+            Content="_Convert" Width="75" Height="23"
             VerticalAlignment="Center"
-            Click="BtnProcessClick" />        
-        
-        <!-- Options -->
+            ToolTip="Convert (Ctrl+Enter)"
+            Click="BtnProcessClick" />
+
+        <!-- Options, grouped by category -->
         <ComboBox x:Name="cmbOptions"
             Grid.Row="1" Grid.Column="2"
-            Height="23" Width="200"
+            Height="23" Width="240"
             IsEditable="False"
-            SelectionChanged="CmbOptions_SelectionChanged" />
+            MaxDropDownHeight="480"
+            SelectionChanged="CmbOptions_SelectionChanged">
+            <ComboBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       Background="{StaticResource PrimaryBackground}"
+                                       Foreground="{StaticResource HighlightAccent}"
+                                       FontWeight="Bold" Padding="6,4" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ComboBox.GroupStyle>
+        </ComboBox>
 
         <!-- Label -->
         <Label x:Name="lblPassword"
             FontFamily="Courier New" FontSize="12"
             Grid.Row="1" Grid.Column="4"
-            Content="Password (Limit - 32 characters)"
+            Content="Password"
             VerticalAlignment="Center"
             Visibility="Collapsed"
             Height="23"
+            Padding="0,4,0,0"
             IsEnabled="False" />
 
         <!-- Stack two inputs in same cell; we toggle them -->
         <Grid Grid.Row="1" Grid.Column="6"
             VerticalAlignment="Center"
             HorizontalAlignment="Left">
-            <!-- key: don’t stretch -->
             <PasswordBox x:Name="pbPassword"
                 Height="23"
                 Visibility="Collapsed"
                 IsEnabled="False"
-                MaxLength="32" 
                 MinWidth="200" />
-            <!--<TextBox x:Name="txtMask"
-                FontFamily="Courier New" FontSize="12"
-                Height="23"
-                Visibility="Collapsed"
-                IsEnabled="False"
-                MinWidth="200" />-->
             <TextBox x:Name="txtMask"
                  FontFamily="Courier New"
                  FontSize="12"
@@ -222,24 +218,9 @@
                  IsEnabled="False"
                  MinWidth="200"
                  VerticalContentAlignment="Center"
-                 Padding="3,0,3,0" />
-            <!-- optional: give it a comfy width -->
+                 Padding="3,0,3,0"
+                 ToolTip="JSONPath, e.g. $.orders[*].id (leave blank to pretty-print)" />
         </Grid>
-
-
-        <!-- Bottom RichTextBox -->
-        <!--<RichTextBox x:Name="rtbOutput"
-                     Grid.Row="2" Grid.ColumnSpan="7"
-                     FontFamily="Courier New" FontSize="12"
-                     AcceptsReturn="True"
-                     VerticalScrollBarVisibility="Auto" 
-                     SpellCheck.IsEnabled="False" >
-            <RichTextBox.Resources>
-                <Style TargetType="{x:Type Paragraph}">
-                    <Setter Property="Margin" Value="0"/>
-                </Style>
-            </RichTextBox.Resources>
-        </RichTextBox>-->
 
         <TextBox x:Name="tbOutput"
              Grid.Row="2" Grid.ColumnSpan="8"
@@ -250,5 +231,20 @@
              HorizontalScrollBarVisibility="Auto"
              Background="White" Foreground="Black"
              CaretBrush="Black" />
+
+        <!-- Status + output actions -->
+        <DockPanel Grid.Row="3" Grid.ColumnSpan="8" Margin="0,6,0,0" LastChildFill="True">
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button x:Name="btnCopy" Content="Copy Output" Height="23" Click="BtnCopyClick"
+                        ToolTip="Copy the output to the clipboard" />
+                <Button x:Name="btnSwap" Content="Output → Input" Height="23" Click="BtnSwapClick"
+                        ToolTip="Move the output into the input box to chain another operation" />
+                <Button x:Name="btnClear" Content="Clear" Height="23" Click="BtnClearClick"
+                        ToolTip="Clear both boxes" />
+            </StackPanel>
+            <TextBlock x:Name="txtStatus" VerticalAlignment="Center"
+                       Foreground="{StaticResource HighlightAccent}" FontSize="12"
+                       TextTrimming="CharacterEllipsis" />
+        </DockPanel>
     </Grid>
 </Window>
