@@ -90,6 +90,15 @@ namespace WpfReformat.Transforms
 
         public static string ToLower(string input) => input.ToLowerInvariant();
 
+        // Start of a word (not after a letter or apostrophe), or the letter after a one-letter
+        // prefix + apostrophe (O'Doyle, D'Angelo) so contractions like "don't" stay lowercase.
+        private static readonly Regex ProperCaseWordStart =
+            new(@"(?<![\p{L}'’])\p{L}|(?<=(?<!\p{L})\p{L}['’])\p{L}", RegexOptions.Compiled);
+
+        /// <summary>Capitalize each word, lowercase the rest: "brad o'doyle" → "Brad O'Doyle".</summary>
+        public static string ProperCase(string input) =>
+            ProperCaseWordStart.Replace(input.ToLowerInvariant(), m => m.Value.ToUpperInvariant());
+
         public static string CommaSplit(string input) => input.Replace(",", ",\n");
 
         // ---- C# / JS snippets ----

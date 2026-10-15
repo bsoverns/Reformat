@@ -40,6 +40,7 @@ namespace WpfReformat.Transforms
             new("Sort Lines",                      Lines, (s, _) => SortLines(s)),
             new("UPPERCASE",                       Lines, (s, _) => ToUpper(s)),
             new("lowercase",                       Lines, (s, _) => ToLower(s)),
+            new("Proper Case",                     Lines, (s, _) => ProperCase(s)),
             new("Comma Split",                     Lines, (s, _) => CommaSplit(s)),
 
             new(JsonEvaluateName,                  Json, (s, ctx) => JsonEvaluate(s, ctx.Mask), ExtraInput.JsonPath),

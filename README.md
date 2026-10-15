@@ -59,6 +59,7 @@ Large inputs are processed on a background thread so the window stays responsive
 | **Distinct Lines** | Trim + remove blanks + remove duplicates (keeps first occurrence order). |
 | **Sort Lines** | Trim + remove blanks + case-insensitive sort. |
 | **UPPERCASE** / **lowercase** | Changes case. |
+| **Proper Case** | Capitalizes each word and lowercases the rest: `brad o'doyle` → `Brad O'Doyle`, `mary-kate` → `Mary-Kate`. Contractions stay lowercase (`don't` → `Don't`). |
 | **Comma Split** | `a,b,c` → one value per line (comma kept). |
 
 ### JSON / XML

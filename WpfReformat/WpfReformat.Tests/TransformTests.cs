@@ -59,6 +59,14 @@ namespace WpfReformat.Tests
             Assert.Equal("a\nB\nc", Run("Sort Lines", "c\nB\na"));
         }
 
+        [Theory]
+        [InlineData("dan peterson", "Dan Peterson")]
+        [InlineData("brad o'doyle", "Brad O'Doyle")]
+        [InlineData("BRAD O'DOYLE\nmary-kate smith", "Brad O'Doyle\nMary-Kate Smith")]
+        [InlineData("don't stop", "Don't Stop")]
+        public void ProperCase_capitalizes_names(string input, string expected) =>
+            Assert.Equal(expected, Run("Proper Case", input));
+
         [Fact]
         public void JsonShrink_keeps_whitespace_inside_strings() =>
             Assert.Equal("{\"a\":\"x y\",\"b\":[1,2]}", Run("JSON Shrink", "{\n  \"a\": \"x y\",\n  \"b\": [ 1, 2 ]\n}"));
