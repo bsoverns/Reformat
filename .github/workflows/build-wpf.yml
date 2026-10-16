@@ -1,5 +1,9 @@
 name: Build WPF
 
+# Pull requests: build + test only.
+# Pushes to main (i.e. merged PRs): build + test, then publish a GitHub Release with
+# Reformat.exe attached and release notes generated from the merged PRs.
+
 on:
   push:
     branches: [main]
@@ -7,9 +11,15 @@ on:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: build-wpf-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: write   # needed to create tags and releases
 
     steps:
       - uses: actions/checkout@v4
@@ -18,17 +28,25 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
+      - name: Compute version
+        shell: pwsh
+        run: |
+          # e.g. 2026.10.16.12  (UTC date + workflow run number)
+          $version = "{0}.{1}" -f (Get-Date).ToUniversalTime().ToString('yyyy.M.d'), $env:GITHUB_RUN_NUMBER
+          "VERSION=$version" >> $env:GITHUB_ENV
+          Write-Host "Version: $version"
+
       - name: Restore
         run: dotnet restore WpfReformat/WpfReformat.sln
 
       - name: Build
-        run: dotnet build WpfReformat/WpfReformat.sln -c Release --no-restore
+        run: dotnet build WpfReformat/WpfReformat.sln -c Release --no-restore -p:Version=${{ env.VERSION }}
 
       - name: Test
         run: dotnet test WpfReformat/WpfReformat.sln -c Release --no-build --logger trx --results-directory TestResults
 
       - name: Publish single-file exe
-        run: dotnet publish WpfReformat/WpfReformat/WpfReformat.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o publish
+        run: dotnet publish WpfReformat/WpfReformat/WpfReformat.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:Version=${{ env.VERSION }} -o publish
 
       - name: Upload Reformat.exe
         uses: actions/upload-artifact@v4
@@ -42,3 +60,23 @@ jobs:
         with:
           name: test-results
           path: TestResults
+
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = "v$env:VERSION"
+          $intro = @"
+          **Download:** ``Reformat.exe`` below. It's a single self-contained file for 64-bit Windows; no install or .NET needed.
+
+          > Windows SmartScreen may warn because the exe isn't code-signed. Click **More info → Run anyway**, or right-click the file → **Properties** → **Unblock**.
+          "@
+          gh release create $tag publish/Reformat.exe `
+            --repo "$env:GITHUB_REPOSITORY" `
+            --target "$env:GITHUB_SHA" `
+            --title "Reformat $env:VERSION" `
+            --notes $intro `
+            --generate-notes `
+            --latest

@@ -4,6 +4,19 @@ A fast desktop utility for transforming large text blobs into the exact shapes I
 Paste into the top box, choose an operation, click **Convert** (or press **Ctrl+Enter**), and copy the result from the bottom box.
 Runs 100% locally on Windows. No cloud calls. No telemetry.
 
+[![Build](https://github.com/bsoverns/Reformat/actions/workflows/build-wpf.yml/badge.svg)](https://github.com/bsoverns/Reformat/actions/workflows/build-wpf.yml)
+[![Latest release](https://img.shields.io/github/v/release/bsoverns/Reformat?label=download)](https://github.com/bsoverns/Reformat/releases/latest)
+
+## Download
+
+**[⬇ Download Reformat.exe (latest)](https://github.com/bsoverns/Reformat/releases/latest/download/Reformat.exe)**
+
+A single file for 64-bit Windows. There's nothing to install and you don't need .NET. Every change merged to `main` builds a new release automatically. See [all releases and their notes](https://github.com/bsoverns/Reformat/releases).
+
+> The exe isn't code-signed, so Windows SmartScreen may warn the first time. Click **More info → Run anyway**,
+> or right-click the file → **Properties** → tick **Unblock**.
+> The version you're running is shown in the window title.
+
 ---
 
 ## Why this exists
@@ -120,6 +133,16 @@ dotnet test WpfReformat/WpfReformat.sln
 ```
 
 Or open `WpfReformat/WpfReformat.sln` in Visual Studio 2022. The executable is `Reformat.exe`.
+
+### CI and releases
+
+`.github/workflows/build-wpf.yml` builds the app and runs the tests on every pull request. When a change is merged to `main`, it also:
+
+1. Stamps the version as `YYYY.M.D.<run number>`, for example `2026.10.16.12`.
+2. Publishes a single-file `Reformat.exe`.
+3. Creates a GitHub Release tagged `v<version>` with the exe attached. The release notes are generated from the pull requests merged since the previous release.
+
+PR titles become the release notes, so give PRs clear titles.
 
 To get a single self-contained exe:
 

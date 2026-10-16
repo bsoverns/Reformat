@@ -1,5 +1,6 @@
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,6 +21,10 @@ namespace WpfReformat
         public MainWindow()
         {
             InitializeComponent();
+
+            // CI builds stamp the version (e.g. 2026.10.16.12); local builds stay 1.0.0.0.
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            Title += version is null || version.Major <= 1 ? " (dev build)" : $" (v{version})";
 
             var view = new ListCollectionView(OperationCatalog.All.ToList());
             view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Operation.Category)));
