@@ -16,7 +16,8 @@ namespace WpfReformat
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Reformat", "last-operation.txt");
 
         private JToken? _jsonRoot = null;                 // cached JSON for live JSON Beautify/Evaluate
-        private readonly DispatcherTimer _debounceTimer;  // debounce for live mask typing
+        // Debounce for live mask typing. Created as a field so it exists before any event handler can run.
+        private readonly DispatcherTimer _debounceTimer = new() { Interval = TimeSpan.FromMilliseconds(250) };
 
         public MainWindow()
         {
@@ -26,13 +27,6 @@ namespace WpfReformat
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             Title += version is null || version.Major <= 1 ? " (dev build)" : $" (v{version})";
 
-            var view = new ListCollectionView(OperationCatalog.All.ToList());
-            view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Operation.Category)));
-            cmbOptions.ItemsSource = view;
-            cmbOptions.SelectedItem = OperationCatalog.Find(LoadLastOperation())
-                                   ?? OperationCatalog.Find(OperationCatalog.DefaultOperation);
-
-            _debounceTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
             _debounceTimer.Tick += (s, e) =>
             {
                 _debounceTimer.Stop();
@@ -66,6 +60,14 @@ namespace WpfReformat
             };
 
             Closing += (s, e) => SaveLastOperation();
+
+            // Populate the dropdown last: selecting an item raises SelectionChanged, which relies on
+            // everything above (e.g. JSON Beautify/Evaluate starts the debounce timer).
+            var view = new ListCollectionView(OperationCatalog.All.ToList());
+            view.GroupDescriptions.Add(new PropertyGroupDescription(nameof(Operation.Category)));
+            cmbOptions.ItemsSource = view;
+            cmbOptions.SelectedItem = OperationCatalog.Find(LoadLastOperation())
+                                   ?? OperationCatalog.Find(OperationCatalog.DefaultOperation);
 
             UpdateStatus();
             tbInput.Focus();
