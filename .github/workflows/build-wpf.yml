@@ -71,7 +71,7 @@ jobs:
           $intro = @"
           **Download:** ``Reformat.exe`` below. It's a single self-contained file for 64-bit Windows; no install or .NET needed.
 
-          > Windows SmartScreen may warn because the exe isn't code-signed. Click **More info → Run anyway**, or right-click the file → **Properties** → **Unblock**.
+          > Windows SmartScreen may warn because the exe isn't code-signed. Click **More info > Run anyway**, or right-click the file > **Properties** > **Unblock**.
           "@
           gh release create $tag publish/Reformat.exe `
             --repo "$env:GITHUB_REPOSITORY" `
