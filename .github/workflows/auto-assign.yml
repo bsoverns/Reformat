@@ -1,0 +1,24 @@
+name: Auto-assign PRs
+
+# Assigns every new pull request to the repository owner so it shows up under
+# "Assigned to you". Uses pull_request_target so it also works for PRs from forks;
+# it never checks out or runs the PR's code.
+
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Assign to repository owner
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          OWNER: ${{ github.repository_owner }}
+        run: gh pr edit "$PR" --repo "$GITHUB_REPOSITORY" --add-assignee "$OWNER"
