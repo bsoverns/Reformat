@@ -151,15 +151,29 @@
             <!-- 7: spacer eats the rest -->
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="tbInput"
-             Grid.Row="0" Grid.ColumnSpan="8"
-             FontFamily="Courier New" FontSize="14"
-             AcceptsReturn="True" AcceptsTab="True"
-             TextWrapping="Wrap"
-             VerticalScrollBarVisibility="Auto"
-             HorizontalScrollBarVisibility="Auto"
-             Background="White" Foreground="Black"
-             CaretBrush="Black" />
+        <!-- Input: text, or a pasted/dropped image shown in its place -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="8"
+              AllowDrop="True" PreviewDragOver="Input_PreviewDragOver" PreviewDrop="Input_PreviewDrop">
+            <TextBox x:Name="tbInput"
+                 FontFamily="Courier New" FontSize="14"
+                 AcceptsReturn="True" AcceptsTab="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"
+                 Background="White" Foreground="Black"
+                 CaretBrush="Black" />
+            <Border x:Name="bdInputImage"
+                Visibility="Collapsed" Focusable="True"
+                Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                ToolTip="Pasted image. Paste text (Ctrl+V) or click Clear to go back to text."
+                MouseDown="ImagePanel_MouseDown">
+                <DockPanel>
+                    <TextBlock x:Name="txtInputImageInfo" DockPanel.Dock="Top"
+                           FontFamily="Courier New" FontSize="12" Foreground="Black" Margin="6,4" />
+                    <Image x:Name="imgInput" Stretch="Uniform" StretchDirection="DownOnly" Margin="6" />
+                </DockPanel>
+            </Border>
+        </Grid>
 
         <!-- Convert button (Ctrl+Enter) -->
         <Button x:Name="btnConvert"
@@ -222,19 +236,33 @@
                  ToolTip="JSONPath, e.g. $.orders[*].id (leave blank to pretty-print)" />
         </Grid>
 
-        <TextBox x:Name="tbOutput"
-             Grid.Row="2" Grid.ColumnSpan="8"
-             FontFamily="Courier New" FontSize="14"
-             AcceptsReturn="True" IsReadOnly="True"
-             TextWrapping="Wrap"
-             VerticalScrollBarVisibility="Auto"
-             HorizontalScrollBarVisibility="Auto"
-             Background="White" Foreground="Black"
-             CaretBrush="Black" />
+        <!-- Output: text, or a decoded image shown in its place -->
+        <Grid Grid.Row="2" Grid.ColumnSpan="8">
+            <TextBox x:Name="tbOutput"
+                 FontFamily="Courier New" FontSize="14"
+                 AcceptsReturn="True" IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"
+                 Background="White" Foreground="Black"
+                 CaretBrush="Black" />
+            <Border x:Name="bdOutputImage"
+                Visibility="Collapsed"
+                Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                <DockPanel>
+                    <TextBlock x:Name="txtOutputImageInfo" DockPanel.Dock="Top"
+                           FontFamily="Courier New" FontSize="12" Foreground="Black" Margin="6,4" />
+                    <Image x:Name="imgOutput" Stretch="Uniform" StretchDirection="DownOnly" Margin="6" />
+                </DockPanel>
+            </Border>
+        </Grid>
 
         <!-- Status + output actions -->
         <DockPanel Grid.Row="3" Grid.ColumnSpan="8" Margin="0,6,0,0" LastChildFill="True">
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button x:Name="btnSaveImage" Content="Save Image..." Height="23" Click="BtnSaveImageClick"
+                        Visibility="Collapsed"
+                        ToolTip="Save the decoded image to a file" />
                 <Button x:Name="btnCopy" Content="Copy Output" Height="23" Click="BtnCopyClick"
                         ToolTip="Copy the output to the clipboard" />
                 <Button x:Name="btnSwap" Content="Output → Input" Height="23" Click="BtnSwapClick"

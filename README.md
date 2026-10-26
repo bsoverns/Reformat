@@ -111,6 +111,10 @@ Large inputs are processed on a background thread so the window stays responsive
 |---|---|
 | **Base64 Encode / Decode (UTF-16)** | Base64 of the UTF-16 bytes. This is what older versions called "Base64 Encrypt/Decrypt". |
 | **Base64 Encode / Decode (UTF-8)** | Base64 of the UTF-8 bytes. Matches most other tools, websites and `base64` on the command line. |
+| **Base64 Image Encode** | Paste an image (Ctrl+V), drop an image file on the input box, or type an image's path. Pasting an image switches to this operation and converts right away. Output is raw Base64. |
+| **Base64 Image Encode (data URI)** | The same, but the output is `data:image/png;base64,...`, ready for HTML `<img src>` or CSS. |
+| **Base64 Image Decode** | Paste Base64 (raw or a `data:` URI) and Convert. The image shows in the output box. **Copy Output** copies the image, **Save Image...** saves it, and **Output → Input** re-encodes it. Supports PNG, JPEG, GIF, BMP, ICO, TIFF and WEBP. |
+| **Base64 Image → data URI** / **data URI → Base64 Image** | Adds or removes the `data:image/...;base64,` prefix on Base64 image text. The image type is detected from the data, so the prefix is always correct. |
 | **URL Encode / Decode** | Percent-encoding for query strings. |
 | **SHA-256 Hash** | Lowercase hex SHA-256 of the UTF-8 text. |
 | **AES-256 Encrypt** | Legacy format, compatible with the WinForms version. Password up to 32 characters. |

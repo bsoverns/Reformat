@@ -13,6 +13,10 @@ namespace WpfReformat.Transforms
 
         public const string JsonEvaluateName = "JSON Beautify/Evaluate";
 
+        public const string ImageEncodeName = "Base64 Image Encode";
+        public const string ImageEncodeDataUriName = "Base64 Image Encode (data URI)";
+        public const string ImageDecodeName = "Base64 Image Decode";
+
         private const string Sql = "SQL";
         private const string Lines = "Line tools";
         private const string Json = "JSON / XML";
@@ -69,6 +73,11 @@ namespace WpfReformat.Transforms
             new("Base64 Decode (UTF-16)",          Encode, (s, _) => Base64Decode(s, Encoding.Unicode)),
             new("Base64 Encode (UTF-8)",           Encode, (s, _) => Base64Encode(s, Encoding.UTF8)),
             new("Base64 Decode (UTF-8)",           Encode, (s, _) => Base64Decode(s, Encoding.UTF8)),
+            new(ImageEncodeName,                   Encode, (s, ctx) => ImageBase64.Encode(ctx.Image ?? ImageBase64.ReadImageFile(s), dataUri: false)),
+            new(ImageEncodeDataUriName,            Encode, (s, ctx) => ImageBase64.Encode(ctx.Image ?? ImageBase64.ReadImageFile(s), dataUri: true)),
+            new(ImageDecodeName,                   Encode, (s, _) => ImageBase64.Describe(ImageBase64.Decode(s))),
+            new("Base64 Image → data URI",         Encode, (s, _) => ImageBase64.Encode(ImageBase64.Decode(s).Bytes, dataUri: true)),
+            new("data URI → Base64 Image",         Encode, (s, _) => ImageBase64.Encode(ImageBase64.Decode(s).Bytes, dataUri: false)),
             new("URL Encode",                      Encode, (s, _) => UrlEncode(s)),
             new("URL Decode",                      Encode, (s, _) => UrlDecode(s)),
             new("SHA-256 Hash",                    Encode, (s, _) => Sha256Hex(s)),

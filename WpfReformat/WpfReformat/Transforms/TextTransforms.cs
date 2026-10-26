@@ -240,14 +240,23 @@ namespace WpfReformat.Transforms
 
         public static string Base64Decode(string input, Encoding encoding)
         {
+            if (input.TrimStart().StartsWith("data:", StringComparison.OrdinalIgnoreCase))
+                throw new InvalidOperationException("This is a data: URI. For images use Base64 Image Decode.");
+
+            byte[] bytes;
             try
             {
-                return encoding.GetString(Convert.FromBase64String(input.Trim()));
+                bytes = Convert.FromBase64String(input.Trim());
             }
             catch (FormatException)
             {
                 throw new InvalidOperationException("Input is not valid Base64.");
             }
+
+            // Decoding an image as text only gives garbage, so point at the right operation instead.
+            if (ImageBase64.DetectMime(bytes) is { } mime)
+                throw new InvalidOperationException($"This Base64 is a {ImageBase64.FormatName(mime)} image. Use Base64 Image Decode to view it.");
+            return encoding.GetString(bytes);
         }
 
         public static string UrlEncode(string input) => WebUtility.UrlEncode(input);
