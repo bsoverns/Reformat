@@ -9,8 +9,8 @@ namespace WpfReformat.Transforms
         JsonPath
     }
 
-    /// <summary>Values gathered from the UI and handed to an operation.</summary>
-    public sealed record OperationContext(string Password = "", string Mask = "");
+    /// <summary>Values gathered from the UI and handed to an operation. Image holds the bytes of a pasted/dropped image.</summary>
+    public sealed record OperationContext(string Password = "", string Mask = "", byte[]? Image = null);
 
     /// <summary>One entry in the Options dropdown.</summary>
     public sealed record Operation(
