@@ -9,6 +9,7 @@
     <ApplicationIcon>Resources\ReformatUpdatedIcon.ico</ApplicationIcon>
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>Reformat</AssemblyName>
+    <Copyright>Copyright © 2014-2026 bsoverns</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
