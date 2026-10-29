@@ -178,3 +178,7 @@ WinFormReformat/                Original WinForms app (.NET Framework 4.8). Lega
 3. Add a test in `WpfReformat.Tests/TransformTests.cs`.
 
 The UI picks it up automatically.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
